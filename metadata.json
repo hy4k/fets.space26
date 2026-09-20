@@ -1,0 +1,6 @@
+{
+  "name": "FETS SPACE",
+  "description": "FETS Space — IT Operations & Asset Management Platform for Exam Testing Centres",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,258 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Cinzel', serif;
+
+  /* Deep Luxury Obsidian & Midnight Graphite (Inspired by Bentley image) */
+  --color-obsidian-950: #050608;
+  --color-obsidian-900: #090A0D;
+  --color-obsidian-850: #0E1015;
+  --color-obsidian-800: #121419;
+  --color-obsidian-750: #171A21;
+  --color-obsidian-700: #1D222C;
+
+  /* Champagne Gold & Amber Bronze (Bentley Luxury Accents) */
+  --color-gold-200: #FAF3E0;
+  --color-gold-300: #F5E2B8;
+  --color-gold-400: #E8CA85;
+  --color-gold-500: #DFB76C;
+  --color-gold-600: #C5A059;
+  --color-gold-700: #A88338;
+  --color-gold-800: #7A5E24;
+  --color-gold-900: #4D3B16;
+  --color-gold-950: #221808;
+
+  --color-bronze-800: #382E20;
+  --color-bronze-900: #261E14;
+  --color-bronze-950: #17120B;
+
+  --color-slate-900: #090A0D;
+  --color-slate-850: #0E1015;
+  --color-slate-800: #13161C;
+  --color-slate-750: #181C23;
+  --color-slate-700: #262118;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --primary: #C5A059;
+    --primary-hover: #B88E44;
+    --primary-light: #FBF8F2;
+    --primary-border: #E8D7B5;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    --fets-bg-page: #F8F7F4;
+    --fets-bg-card: #FFFFFF;
+    --fets-text-primary: #1A1916;
+    --fets-text-secondary: #70685E;
+    --fets-border: #E5DFC8;
+    --fets-gold: #C5A059;
+    --fets-gold-glow: rgba(197, 160, 89, 0.15);
+  }
+
+  html.dark, :root[data-theme="dark"], body.dark {
+    --primary: #DFB76C;
+    --primary-hover: #F0CE88;
+    --primary-light: #1D1810;
+    --primary-border: #4D3D24;
+
+    --fets-bg-page: #090A0D;
+    --fets-bg-card: #121419;
+    --fets-bg-elevated: #171A21;
+    --fets-text-primary: #FAF7F2;
+    --fets-text-secondary: #A39A8E;
+    --fets-border: #262118;
+    --fets-gold: #C5A059;
+    --fets-gold-glow: rgba(223, 183, 108, 0.22);
+  }
+
+  html, body, #root {
+    background-color: var(--fets-bg-page);
+    color: var(--fets-text-primary);
+    min-height: 100%;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  body {
+    background-color: var(--fets-bg-page);
+    color: var(--fets-text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.011em;
+  }
+}
+
+/* 3D Playing Card Flip utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-1200 {
+  perspective: 1200px;
+}
+
+.perspective-1500 {
+  perspective: 1500px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Flip Card Component CSS matching user specification */
+.flip-card {
+  background-color: transparent;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+/* Card only flips when .flipped class is set (triggered by hovering bottom space or explicit action) */
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card.force-front .flip-card-inner {
+  transform: rotateY(0deg) !important;
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+}
+
+/* Ensure pointer-events match active side */
+.flip-card.flipped .flip-card-front {
+  pointer-events: none;
+}
+
+.flip-card:not(.flipped) .flip-card-back {
+  pointer-events: none;
+}
+
+.flip-card.flipped .flip-card-back {
+  pointer-events: auto;
+}
+
+.flip-card.force-front .flip-card-front {
+  pointer-events: auto !important;
+}
+
+.flip-card.force-front .flip-card-back {
+  pointer-events: none !important;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Custom subtle scrollbar (Luxury Bronze & Obsidian) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090A0D;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2A241B;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C5A059;
+}
+
+html:not(.dark) ::-webkit-scrollbar-track {
+  background: #F4EFE6;
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: #D5CBB9;
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: #A89B85;
+}
+
+/* Luxury Bentley-Inspired Atmospheric Highlights */
+.luxury-gold-glow {
+  box-shadow: 0 0 25px -4px rgba(197, 160, 89, 0.28);
+}
+
+.luxury-gold-gradient {
+  background: linear-gradient(135deg, #D4AF37 0%, #DFB76C 48%, #C5A059 100%);
+}
+
+.luxury-gold-text {
+  background: linear-gradient(135deg, #F5E2B8 0%, #DFB76C 50%, #C5A059 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.luxury-border-glow:hover {
+  border-color: rgba(197, 160, 89, 0.6);
+  box-shadow: 0 0 20px -3px rgba(197, 160, 89, 0.2);
+}
+
+/* Pulse animation for live indicators */
+@keyframes soft-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.96); }
+}
+
+.animate-soft-pulse {
+  animation: soft-pulse 2.5s ease-in-out infinite;
+}
+
+/* =========================================================================
+   TCG COLLECTIBLE CARD THEME STYLES (Inspired by Fantasy Art Cards)
+   ========================================================================= */
+@keyframes tcg-shimmer-sweep {
+  0% { transform: translateX(-150%) rotate(25deg); }
+  100% { transform: translateX(150%) rotate(25deg); }
+}
+
+.tcg-holo-gleam {
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 30%,
+    rgba(255, 235, 180, 0.22) 45%,
+    rgba(180, 240, 255, 0.32) 50%,
+    rgba(255, 190, 240, 0.22) 55%,
+    rgba(255, 255, 255, 0.05) 70%,
+    transparent 100%
+  );
+  background-size: 200% 200%;
+}
+
+.group:hover .tcg-holo-gleam-sweep {
+  animation: tcg-shimmer-sweep 1.2s ease-in-out;
+}
